@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Course</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: green;
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        input[type="submit"], input[type="reset"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            width: 49%;
+        }
+
+        input[type="submit"]:hover, input[type="reset"]:hover {
+            background-color: #45a049;
+        }
+
+        input[type="reset"] {
+            background-color: #f44336;
+        }
+        body {
+            background-image: url('/static/image1.jpg');
+            background-size: cover;
+        }
+        .navbar {
+            background-color: #EE2D0B !important; /* Red color for the navbar */
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #FFFFFF; /* White text color for navbar links */
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            color: #FF0000; /* Red color for the footer text */
+        }
+         h1 {
+        text-align: center;
+        font-size: 36px;/* Adjust font size as needed */
+        color: #FF0000
+    }
+    </style>
+</head>
+{% block content %}
+
+<body style="
+            background-image: url('/static/image1.jpg');
+            background-size: cover;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">StudentManagementSystem</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'viewstudent' %}">Student</a>
+                </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'addcourse' %}">AddCourse</a>
+                </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'viewticket' %}">viewtickets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'courses' %}">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <h2>{{msg}}</h2>
+    <h3 align="center"><u>Add Course</u></h3>
+    <form method="post" action="{% url 'insertcourse' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td><label>Select Department</label></td>
+                <td>
+                    <select name="dept" required>
+                        <option value="">--Select--</option>
+                        <option value="CSE(H)">CSE(Honours)</option>
+                        <option value="CSE(R)">CSE(Regular)</option>
+                        <option value="CS&IT">CS&IT</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>Select Academic Year</label></td>
+                <td>
+                    <select name="Ayear" required>
+                        <option value="">--Select--</option>
+                        <option value="2023-24">2023-24</option>
+                        <option value="2022-23">2022-23</option>
+                        <option value="2021-22">2021-22</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>Select Semester</label></td>
+                <td>
+                    <select name="semester" required>
+                        <option value="">--Select--</option>
+                        <option value="ODD SEM">ODD SEM</option>
+                        <option value="EVEN SEM">EVEN SEM</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>Select Year</label></td>
+                <td>
+                    <input type="number" name="year" min="1" max="4" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>Enter Course Code</label></td>
+                <td>
+                    <input type="text" name="ccode" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>Enter Course Title</label></td>
+                <td>
+                    <input type="text" name="ctitle" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Add">
+                    <input type="reset" value="Clear">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+{% endblock %}
+</html>

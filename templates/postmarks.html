@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postmarks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        h3 {
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body style="
+            background-image: url('/static/image1.jpg');
+            background-size: cover;">
+
+<h2>Postmarks</h2>
+<form method="POST" action="{% url 'checkmarks' %}">
+    {% csrf_token %}
+    <label for="studentId">Student ID:</label>
+    <input type="text" id="studentId" name="studentId" required>
+
+    <h3>Course </h3>
+    <label for="courseName1">Course Name:</label>
+   <select id="courseName1" name="courseName1" required style="height:35px;width:600px;">
+    <option value="">Select Course</option>
+    {% for course in courses %}
+       <option value="{{ course.coursetitle }}">{{ course.coursetitle }}</option>
+    {% endfor %}
+</select>
+    <label style="margin-top:10px;" for="credits1">Credits:</label>
+    <input type="number" id="credits1" name="credits1" required>
+    <label for="gradePoints1">Grade Points:</label>
+    <input type="number" id="gradePoints1" name="gradePoints1" required>
+    <label for="grade1">Grade:</label>
+    <input type="text" id="grade1" name="grade1" required>
+    <label for="grade1">FacultyId:</label>
+    <input type="text" id="FacultyId" name="FacultyId" required>
+    <label for="grade1">FacultyName</label>
+    <input type="text" id="FacultyName" name="FacultyName" required>
+
+    <input type="submit" value="Submit">
+</form>
+{% for i in messages %}
+    {% if i.tags %}
+        <script>alert("{{i}}")</script>
+    {% endif %}
+{% endfor %}
+</body>
+</html>

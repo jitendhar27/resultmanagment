@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            width: 100%;
+        }
+    </style>
+    <!-- Include jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body style="
+            background-image: url('/static/image1.jpg');
+            background-size: cover;">
+    <center>
+        <input class="form-control" id="myInput" type="text" placeholder="Name"><br>
+        <table class="table table-bordered table-striped" style="width:700px;margin-top:10%;">
+            <thead>
+                <tr bgcolor="lightblue" align="center">
+                    <td>Studentid</td>
+                    <td>Course Name</td>
+                    <td>Credits</td>
+                    <td>Grade Points</td>
+                    <td>Grade</td>
+                    <td>FacultyId</td>
+                    <td>FacultyName</td>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                {% for i in  result %}
+                    <tr align="center">
+                        <td>{{ i.studentId }}</td>
+                        <td>{{ i.course_name }}</td>
+                        <td>{{ i.credits }}</td>
+                        <td>{{ i.grade_points }}</td>
+                        <td>{{ i.grade }}</td>
+                        <td>{{ i.Correctedbyfacultyid }}</td>
+                        <td>{{ i.CorrectedbyfacultyName }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </center>
+
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+    </script>
+</body>
+</html>

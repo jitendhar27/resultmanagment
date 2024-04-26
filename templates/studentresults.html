@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="
+            background-image: url('/static/image1.jpg');
+            background-size: cover;">
+
+<form method="POST" action="{% url 'viewresults'%}">
+    {% csrf_token %}
+    <input type="submit" name="submit">
+</form>
+
+</body>
+</html>

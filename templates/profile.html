@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Student Profile</title>
+    <style>
+        /* Add your CSS styles here */
+        label {
+            display: inline-block;
+            width: 120px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="email"] {
+            width: 300px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .student-info {
+            display: none;
+            margin-top: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        body {
+            background-image: url('/static/image1.jpg');
+            background-size: cover;
+        }
+        .navbar {
+            background-color: #EE2D0B !important; /* Red color for the navbar */
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #FFFFFF; /* White text color for navbar links */
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            color: #FF0000; /* Red color for the footer text */
+        }
+    </style>
+</head>
+<body style="
+            background-image: url('/static/image1.jpg');
+            background-size: cover;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">StudentManagementSystem</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'feepayments' %}">FeePayments</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'viewresult' %}">Results</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'ticket' %}">Raise ticket</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Student Profile</h1>
+    <form id="studentForm" method="POST" action="{% url 'checkstudent'%}">
+        {% csrf_token %}
+        <label for="studentId">Student ID:</label>
+        <input type="text" id="studentId" name="studentId" required><br>
+
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required><br>
+
+        <label for="branch">Branch:</label>
+        <input type="text" id="branch" name="branch" required><br>
+
+        <label for="yearOfStudy">Year of Study:</label>
+        <input type="text" id="yearOfStudy" name="yearOfStudy" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="contact">Contact:</label>
+        <input type="text" id="contact" name="contact" required><br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required><br>
+
+        <button type="submit">Save</button>
+    </form>
+    {% for message in messages %}
+        {% if message.tags %}
+            <script>alert("{{ message }}")</script>
+        {% endif %}
+    {% endfor %}
+     <table  style="background-color:white;">
+        <tr>
+            <th>Student ID</th>
+            <th>Full Name</th>
+            <th>Branch</th>
+            <th>Year of Study</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Address</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.studentId }}</td>
+            <td>{{ user.full_name }}</td>
+            <td>{{ user.branch }}</td>
+            <td>{{ user.year_of_study }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.contact }}</td>
+            <td>{{ user.address }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

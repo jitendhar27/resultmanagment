@@ -1,0 +1,121 @@
+{% extends 'student.html'%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Student Profile</title>
+    <!-- Include jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+    /* Your custom CSS styles */
+         body {
+            background-image: url('/static/image1.jpg');
+            background-size: cover;
+        }
+        .navbar {
+            background-color: #EE2D0B !important; /* Red color for the navbar */
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #FFFFFF; /* White text color for navbar links */
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            color: #FF0000; /* Red color for the footer text */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/static/image1.jpg');
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        thead {
+            background-color: lightblue;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <input class="form-control" id="myInput" type="text" placeholder="Enter Student ID"><br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Full Name</th>
+                    <th>Branch</th>
+                    <th>Year of Study</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.studentId }}</td>
+                    <td>{{ student.full_name }}</td>
+                    <td>{{ student.branch }}</td>
+                    <td>{{ student.year_of_study }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.contact }}</td>
+                    <td>{{ student.address }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 800px;
+            margin-left:20%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        body {
+            background-image: url('/static/image1.jpg');
+            background-size: cover;
+        }
+        .navbar {
+            background-color: #EE2D0B !important; /* Red color for the navbar */
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #FFFFFF; /* White text color for navbar links */
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            color: #FF0000; /* Red color for the footer text */
+        }
+         h1 {
+        text-align: center;
+        font-size: 36px;/* Adjust font size as needed */
+        color: #FF0000
+    }
+    </style>
+</head>
+<body style="
+            background-image: url('/static/image1.jpg');
+            background-size: cover;">
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">StudentManagementSystem</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'viewstudent' %}">Student</a>
+                </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'addcourse' %}">AddCourse</a>
+                </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'viewticket' %}">viewtickets</a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'courses' %}">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+  <table  style="background-color:white;">
+    <thead>
+      <tr>
+        <th>Student ID</th>
+        <th>Ticket</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in tickets %}
+      <tr>
+        <td>{{ i.studentid }}</td>
+        <td>{{ i.ticket }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

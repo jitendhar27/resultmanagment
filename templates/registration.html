@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" style="backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.5);width:770px;border-radius:15px;">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="mb-3">Registration</h2>
+            {% if message %}
+            <div><h6 style="color:red;">{{message}}</h6></div>
+            {% endif %}
+            <form id="registrationForm" action="{% url 'register_view' %}" method="post" onsubmit="return validateForm()">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username"  style="color:red;" >Username</label>
+                    <input type="text" class="form-control" id="username" name="username" pattern="[a-zA-Z0-9]+" required>
+                    <small class="form-text" style="color:blue;">Username can contain letters or numbers.</small>
+                </div>
+                <div class="form-group">
+    <label for="email"  style="color:red;" >Email</label>
+    <input type="email" class="form-control" id="email" name="email" pattern="[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|\.in)$" required>
+    <small class="form-text" style="color:blue;">Email must end with @gmail.com, @yahoo.com, or .in</small>
+    <span id="emailError" class="error"></span>
+    </div>
+
+                <div class="form-group">
+                    <label for="password"  style="color:red;" >Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword"  style="color:red;">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required>
+                </div>
+                <div class="form-group">
+                    <label for="city"  style="color:red;">City</label>
+                    <input type="text" class="form-control" id="city" name="city" required>
+                </div>
+               <center><button style="margin-bottom:10px;" type="submit" class="btn btn-primary">Register</button></center>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% if messages %}
+  {% for message in messages %}
+   {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+  {% endfor %}
+{% endif %}
+
+<script src="{% static 'ex.ja' %}"
+
+
+
+{% endblock %}
